@@ -1,14 +1,13 @@
-import { CREATE_TODO, REMOVE_TODO, COMPLEDED_TODO } from './actions';
+import { CREATE_TODO, REMOVE_TODO, MARK_TODO_AS_COMPLETED } from './actions';
 const reducerTodo = (state = [], action) => {
     const { type, payload } = action;
-    console.log('reducerTodo call ', ' type :', type)
+    console.log(' type :', type)
 
     switch (type) {
         case REMOVE_TODO: {
             const { text } = payload;
             console.log('text :', text)
-            state = state.filter(value => value.text !== text)
-            break;
+            return state.filter(value => value.text !== text)
         }
         case CREATE_TODO: {
             const { text } = payload;
@@ -17,24 +16,24 @@ const reducerTodo = (state = [], action) => {
                 text,
                 isCompleted: false,
             })
-            break;
+            return state;
         }
-        case COMPLEDED_TODO: {
+       
+        case MARK_TODO_AS_COMPLETED: {
             const { text } = payload;
-            console.log('text :', text)
-            state = state.map(value => {
-                if (value.text === text) {
-                   return {...value , isCompleted  : true }
+            return state.map(todo => {
+                if (todo.text === text) {
+                    return { ...todo, isCompleted: true };
                 }
-            })
-            break;
+                return todo;
+            });
         }
         default:
             return state
 
     }
 
-    return state
+
 }
 
 export default reducerTodo

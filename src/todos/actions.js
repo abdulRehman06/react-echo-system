@@ -19,12 +19,9 @@
          }
      }
  } 
- export const COMPLEDED_TODO  = 'COMPLEDED_TODO' ;
- export const  ucIsTodoCompleted = (text)  => {
-     return{
-         type : COMPLEDED_TODO,
-         payload : {
-             text
-         }
-     }
- } 
+ export const MARK_TODO_AS_COMPLETED = 'MARK_TODO_AS_COMPLETED';
+export const markTodoAsCompleted = text => ({
+    type: MARK_TODO_AS_COMPLETED,
+    payload: { text },
+});
+

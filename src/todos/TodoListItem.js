@@ -4,7 +4,6 @@ import './TodoListItem.css';
 const TodoListItem = (props) => {
     const { todo, onRemovePressed, onCompletedPressed } = props;
     // console.log('--props :', props)
-    console.log('todo.isCompleted :', todo)
 
     return (
         <div className="todo-item-container"  >

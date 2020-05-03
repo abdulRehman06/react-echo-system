@@ -19,3 +19,12 @@
          }
      }
  } 
+ export const COMPLEDED_TODO  = 'COMPLEDED_TODO' ;
+ export const  ucIsTodoCompleted = (text)  => {
+     return{
+         type : COMPLEDED_TODO,
+         payload : {
+             text
+         }
+     }
+ } 

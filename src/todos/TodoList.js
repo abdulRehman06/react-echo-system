@@ -1,16 +1,16 @@
 import React from 'react'
 import TodoListItem from './TodoListItem'
 import { connect } from 'react-redux'
-import { ucRemoveTodo   } from './actions'
+import { ucRemoveTodo  , ucIsTodoCompleted } from './actions'
 
 
 const TodoList = (props) => {
-    console.log("todos", props)
-
-    const { todos, onRemovePressed } = props;
+    
+    const { todos, onRemovePressed , onCompletedPressed  } = props;
+    console.log("todos", todos);
     return (
         <div>
-            {todos.map(todo => <TodoListItem todo={todo}  onRemovePressed={onRemovePressed}/>)}
+            {todos.map(todo => <TodoListItem todo={todo}  onCompletedPressed={onCompletedPressed} onRemovePressed={onRemovePressed} key ={todo.text} />)}
         </div>
     )
 }
@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProp = (dispatch) => {
     return {
-        onRemovePressed:  text  => dispatch(ucRemoveTodo(text))
+        onRemovePressed: text => dispatch(ucRemoveTodo(text)),
+        onCompletedPressed: text => dispatch(ucIsTodoCompleted(text))
     }
 }
 

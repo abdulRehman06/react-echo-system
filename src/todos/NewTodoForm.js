@@ -34,7 +34,7 @@ const NewTodoForm = (props) => {
 const mapStateToProps = (state) => {
     console.log('state :', state.reducer)
     return {
-        todos: state.reducer
+        todos: state.reducerTodo
     }
 }
 

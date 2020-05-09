@@ -1,53 +1,43 @@
 
 
 export const CREATE_TODO = 'CREATE_TODO';
-export const ucCreateTodo = (text) => {
+export const ucCreateTodo = (todo) => {
     return {
         type: CREATE_TODO,
         payload: {
-            text
+            todo
         }
     }
 }
 
 export const REMOVE_TODO = 'REMOVE_TODO';
-export const ucRemoveTodo = (text) => {
+export const ucRemoveTodo = (todo) => {
     return {
         type: REMOVE_TODO,
         payload: {
-            text
+            todo
         }
     }
 }
 export const MARK_TODO_AS_COMPLETED = 'MARK_TODO_AS_COMPLETED';
-export const markTodoAsCompleted = text => ({
+export const markTodoAsCompleted = todo => ({
     type: MARK_TODO_AS_COMPLETED,
-    payload: { text },
+    payload: { todo },
 });
 
 
+export const LOAD_TODOS_IN_PROGRESS = 'LOAD_TODOS_IN_PROGRESS';
+export const loadTodosInProgress = () => ({
+    type: LOAD_TODOS_IN_PROGRESS,
+});
 
 export const LOAD_TODOS_SUCCESS = 'LOAD_TODOS_SUCCESS';
-export const loadTodoSuccess = (todos) => {
-    return {
-        type: LOAD_TODOS_SUCCESS,
-        payload: {
-            todos,
-        }
-    }
-}
-
-export const LOAD_TODOS_IN_PROGRESS = 'LOAD_TODOS_IN_PROGRESS';
-export const loadTodoInProgress = () => {
-    return {
-        type: LOAD_TODOS_IN_PROGRESS,
-    }
-}
-
+export const loadTodoSuccess = todos => ({
+    type: LOAD_TODOS_SUCCESS,
+    payload: { todos },
+});
 
 export const LOAD_TODOS_FAILURE = 'LOAD_TODOS_FAILURE';
-export const loadTodoFailure = () => {
-    return {
-        type: LOAD_TODOS_FAILURE,
-    }
-}
+export const loadTodosFailure = () => ({
+    type: LOAD_TODOS_FAILURE,
+});

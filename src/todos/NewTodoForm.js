@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './NewTodoForm.css';
 import { connect } from 'react-redux'
-import { ucCreateTodo } from './actions'
+import {addTodoRequest}  from  './thunk'
 
 const NewTodoForm = (props) => {
     let [inputValue, setInputValue] = useState('')
-    const { ucCreateTodo, todos } = props;
+    const { addTodoRequest, todos } = props;
     return (
         <div className="new-todo-form">
             <input
@@ -16,10 +16,10 @@ const NewTodoForm = (props) => {
             />
             <button className="new-todo-button"
                 onClick={() => {
-                    // console.log('todos -------' , todos ) 
+                    console.log('todos -------' , todos ) 
                     const isDublicate = todos.some(value => value.text === inputValue)
                     if (!isDublicate) {
-                        ucCreateTodo(inputValue);
+                        addTodoRequest(inputValue);
                         setInputValue('');
                     }
                     else{
@@ -38,4 +38,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { ucCreateTodo })(NewTodoForm)
+export default connect(mapStateToProps, { addTodoRequest })(NewTodoForm)

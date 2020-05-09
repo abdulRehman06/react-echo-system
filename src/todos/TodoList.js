@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
 import TodoListItem from './TodoListItem'
 import { connect } from 'react-redux'
-import { loadTodos } from './thunk'
-import { ucRemoveTodo, markTodoAsCompleted } from './actions'
+import { loadTodos , removeTodRequest, markTodoCompletedReq} from './thunk'
 
 
-const TodoList = (props) => {
-
-    const { todos, onRemovePressed, onCompletedPressed, isLoading, startLoadingTodos } = props;
-    useEffect(() => {
-        startLoadingTodos();
-    }, []);
+const TodoList = ( { todos, onRemovePressed, onCompletedPressed, isLoading, startLoadingTodos } ) => {
+        useEffect(() => {
+            startLoadingTodos();
+        } , [] ); 
+    
     console.log("isLoading", isLoading);
     const LoadingMessage = <div>Loading Todos...</div>
     const content = (
@@ -29,15 +27,15 @@ const TodoList = (props) => {
 const mapStateToProps = (state) => {
     return {
         todos: state.reducerTodo,
-        isLoading: state.isLoading,
+        isLoading: state.isLoading
     }
 }
 
 
 const mapDispatchToProp = (dispatch) => {
     return {
-        onRemovePressed: text => dispatch(ucRemoveTodo(text)),
-        onCompletedPressed: text => dispatch(markTodoAsCompleted(text)),
+        onRemovePressed: todo => dispatch(removeTodRequest(todo)),
+        onCompletedPressed: todo => dispatch(markTodoCompletedReq(todo)),
         startLoadingTodos: () => dispatch(loadTodos()) // thunk call
     }
 }

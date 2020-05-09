@@ -12,15 +12,15 @@ import {
 
 export const isLoading = (state = false, action) => {
     const { type } = action;
-    console.log('reducer isLoading call type --------------:', type)
+
     switch (type) {
-        case LOAD_TODOS_IN_PROGRESS:
-            return true;
-        case LOAD_TODOS_SUCCESS:
-        case LOAD_TODOS_FAILURE:
-            return false;
-        default:
-            return state;
+    case LOAD_TODOS_IN_PROGRESS:
+        return true;
+    case LOAD_TODOS_SUCCESS:
+    case LOAD_TODOS_FAILURE:
+        return false;
+    default:
+        return state;
     }
 }
 
@@ -30,32 +30,30 @@ export const reducerTodo = (state = [], action) => {
 
     switch (type) {
         case REMOVE_TODO: {
-            const { text } = payload;
-            console.log('text :', text)
-            return state.filter(value => value.text !== text)
+            const { todo } = payload;
+            console.log('todo :', todo)
+            return state.filter(value => value.id !== todo.id)
         }
         case CREATE_TODO: {
-            const { text } = payload;
-            // console.log('text :' , text )
-            state = state.concat({
-                text,
-                isCompleted: false,
-            })
+            const { todo } = payload;
+            // console.log('payloads :' , payloads )
+            // console.log('todo :' , todo )
+            state = state.concat(todo)
             return state;
         }
         case MARK_TODO_AS_COMPLETED: {
-            const { text } = payload;
-            return state.map(todo => {
-                if (todo.text === text) {
-                    return { ...todo, isCompleted: true };
+            const { todo  } = payload;
+            return state.map(item => {
+                if (item.id === todo.id) {
+                    return todo;
                 }
-                return todo;
+                return item;
             });
         }
         case LOAD_TODOS_SUCCESS: {
             const { todos } = payload;
-            console.log('todos : ', todos)
-            return [...state, ...todos];
+            // console.log('todos : ', todos)
+            return todos;
         }
         case LOAD_TODOS_IN_PROGRESS:
         case LOAD_TODOS_FAILURE:

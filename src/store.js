@@ -1,6 +1,6 @@
 
 import { createStore, combineReducers } from 'redux'
-import {reducerTodo , isLoading  } from './todos/reducer'
+import {reducerTodo   } from './todos/reducer'
 
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -11,7 +11,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducer = {
     reducerTodo,
-    isLoading  // show loading msg if data is fetching from server
 };
 const rootReducer = combineReducers(reducer);
 

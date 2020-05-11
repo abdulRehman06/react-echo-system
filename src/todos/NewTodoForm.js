@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './NewTodoForm.css';
 import { connect } from 'react-redux'
 import {addTodoRequest}  from  './thunk'
+import {selGetTodo }  from './selector'  
 
 const NewTodoForm = (props) => {
     let [inputValue, setInputValue] = useState('')
@@ -34,7 +35,7 @@ const NewTodoForm = (props) => {
 const mapStateToProps = (state) => {
     console.log('state :', state.reducer)
     return {
-        todos: state.reducerTodo
+        todos: selGetTodo(state)
     }
 }
 

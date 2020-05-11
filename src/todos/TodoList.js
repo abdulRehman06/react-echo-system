@@ -1,19 +1,27 @@
 import React, { useEffect } from 'react'
 import TodoListItem from './TodoListItem'
 import { connect } from 'react-redux'
-import { loadTodos , removeTodRequest, markTodoCompletedReq} from './thunk'
+import { selGetTodo, selGetIsLoading, selGetCompletedTodos , selGetInCompletedTodos } from './selector'
+import { loadTodos, removeTodRequest, markTodoCompletedReq } from './thunk'
 
 
-const TodoList = ( { todos, onRemovePressed, onCompletedPressed, isLoading, startLoadingTodos } ) => {
-        useEffect(() => {
-            startLoadingTodos();
-        } , [] ); 
-    
-    console.log("isLoading", isLoading);
+const TodoList = ({ todos, onRemovePressed, onCompletedPressed, isLoading, startLoadingTodos, selGetCompletedTodos , selGetInCompletedTodos }) => {
+    useEffect(() => {
+        startLoadingTodos();
+    }, []);
+
+    // console.log("isLoading", isLoading);
+    console.log("selGetCompletedTodos", selGetCompletedTodos);
     const LoadingMessage = <div>Loading Todos...</div>
     const content = (
         <div>
-            {todos.map(todo =>
+            <h1>Un Completed Totos...</h1>
+            {selGetInCompletedTodos.map(todo =>
+                <TodoListItem todo={todo} key={todo}
+                    onCompletedPressed={onCompletedPressed}
+                    onRemovePressed={onRemovePressed} />)}
+            <h1>Completed Totos...</h1>
+            {selGetCompletedTodos.map(todo =>
                 <TodoListItem todo={todo} key={todo}
                     onCompletedPressed={onCompletedPressed}
                     onRemovePressed={onRemovePressed} />)}
@@ -26,8 +34,10 @@ const TodoList = ( { todos, onRemovePressed, onCompletedPressed, isLoading, star
 
 const mapStateToProps = (state) => {
     return {
-        todos: state.reducerTodo,
-        isLoading: state.isLoading
+        todos: selGetTodo(state),
+        isLoading: selGetIsLoading(state),
+        selGetCompletedTodos: selGetCompletedTodos(state),
+        selGetInCompletedTodos: selGetInCompletedTodos(state)
     }
 }
 
